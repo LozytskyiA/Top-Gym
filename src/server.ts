@@ -22,6 +22,3 @@ app.use(require('./routes/users.routes'));
     console.log(`Started`);
   });
 })();
-
-
-

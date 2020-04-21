@@ -1,0 +1,19 @@
+{
+  "name": "Top-Gym",
+  "version": "1.0.0",
+  "dependencies": {
+    "@types/node": "^13.11.1",
+    "body-parser": "^1.19.0",
+    "class-transformer": "^0.2.3",
+    "class-validator": "^0.11.1",
+    "express": "^4.17.1",
+    "pg": "^8.0.2",
+    "reflect-metadata": "^0.1.13",
+    "ts-node": "^8.8.2",
+    "typeorm": "^0.3.0-alpha.24",
+    "typescript": "^3.8.3"
+  },
+  "scripts": {
+    "dev": "ts-node ./src/server.ts"
+  }
+}

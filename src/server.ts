@@ -1,21 +1,14 @@
-import 'dotenv/config';
-import 'reflect-metadata';
-import { createConnection } from 'typeorm';
-import App from './app';
-import config from './ormconfig';
-import UsersController from './users/users.controller';
+const express = require('express');
+const bodyParser = require('body-parser');
+const { createConnection } = require('net');
+import config from "./ormconfig";
 
-(async () => {
-  try {
-    await createConnection(config);
-  } catch (error) {
-    console.log('Error while connecting to the database', error);
-    return error;
-  }
-  const app = new App(
-    [
-      new UsersController(),
-    ],
-  );
-  app.listen();
-})();
+const app = express();
+app.use(bodyParser.json());
+app.use(require('./routes/users.routes'));
+
+createConnection(config);
+
+app.listen(5000, () => {
+  console.log(`App listening on the port ${5000}`);
+});

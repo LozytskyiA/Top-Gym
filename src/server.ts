@@ -1,9 +1,15 @@
 import 'dotenv/config';
 import 'reflect-metadata';
 import { createConnection } from 'typeorm';
-import App from './app';
-import config from './ormconfig';
-import UsersController from './users/users.controller';
+import config from "./ormconfig";
+const express = require('express');
+const bodyParser = require('body-parser');
+
+const app = express();
+
+app.use(bodyParser.json());
+
+app.use(require('./routes/users.routes'));
 
 (async () => {
   try {
@@ -12,10 +18,10 @@ import UsersController from './users/users.controller';
     console.log('Error while connecting to the database', error);
     return error;
   }
-  const app = new App(
-    [
-      new UsersController(),
-    ],
-  );
-  app.listen();
+  app.listen(process.env.PORT || 5000, () => {
+    console.log(`Started`);
+  });
 })();
+
+
+

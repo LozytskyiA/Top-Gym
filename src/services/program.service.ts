@@ -7,8 +7,7 @@ exports.createProgram = async (data: CreateProgramDto, id: number) => {
   const newProgram = getRepository(Program).create(data);
   const user = await getRepository(User).findOne(id)
   newProgram.users = [user]
-  const testData = getRepository(Program).save(newProgram);
-  return testData;
+  return getRepository(Program).save(newProgram);
 }
 
 exports.getAllPrograms = () => getRepository(Program).find();

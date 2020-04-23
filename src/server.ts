@@ -10,6 +10,7 @@ const app = express();
 app.use(bodyParser.json());
 
 app.use(require('./routes/users.routes'));
+app.use(require('./routes/program.routes'));
 
 (async () => {
   try {

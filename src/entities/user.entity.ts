@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, JoinTable, ManyToMany, ManyToOne } from 'typeorm';
+import Program from './program.entity';
 
 @Entity()
 class User {

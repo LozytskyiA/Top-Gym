@@ -39,3 +39,9 @@ exports.deleteUser = async (request: express.Request, response: express.Response
     next(new UserNotFoundException(id));
   }
 }
+
+// exports.getUserByEmail = async (request: express.Request, response: express.Response, next: express.NextFunction) => {
+//   const email = request.params.email;
+//   const user = Users.getUserByEmail(email);
+//   return user;
+// }

@@ -1,6 +1,6 @@
 import validationMiddleware from "../middleware/validation.middleware";
 import CreateUserDto from "../dto/user.dto";
-import { auth } from '../auth/auth';
+import { auth } from '../middleware/auth';
 const { Router } = require('express');
 const { createUser, getAllUsers, getUserById, modifyUser, deleteUser } = require('../controllers/user.controller');
 

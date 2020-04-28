@@ -6,15 +6,15 @@ interface IInputProps {
   placeholder?: string;
   label: string,
   inputName: string,
-  value?: string
+  value: string
 }
 
 export const Input: FC<IInputProps> = (props) => {
-
   const { 
     inputChangeHandler,
     label,
     inputName,
+    value,
    } = props
 
   return (
@@ -24,6 +24,7 @@ export const Input: FC<IInputProps> = (props) => {
       label={label}
       name={inputName}
       variant="outlined"
+      value={value}
     />
   );
 }

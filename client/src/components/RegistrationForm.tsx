@@ -37,16 +37,19 @@ const RegistrationForm: FC = () => {
     try {
       await registerUser(user);
       setUser(emptyUserData)
+      console.log('sadfsa');
     } catch(error) {
       console.log(error);
     }
   }
 
+  const getKeyValue = (key: string) => (obj: Record<string, any>) => obj[key];
+  
   return (
     <form noValidate autoComplete="off" onSubmit={createUser}>
       {Object.keys(user).map((label) => (
         label !== 'role'
-        ? <Input inputChangeHandler={changeHandler} label={label} key={label} inputName={label} />
+        ? <Input inputChangeHandler={changeHandler} value={getKeyValue(label)(user)} label={label} key={label} inputName={label} />
         : <Select inputChangeHandler={changeHandler} value={user.role} label={label} key={label} selectName={label} />
       ))}
       <Button onClick={createUser} variant="contained" color="secondary">

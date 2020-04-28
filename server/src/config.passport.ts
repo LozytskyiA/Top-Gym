@@ -10,15 +10,13 @@ passport.use(new LocalStrategy({
     usernameField: 'email',
     passwordField: 'password_salt'
   },
-  async (email, password, done) => {
+  async (email: string, password, done) => {
     const user = await Users.getUserByEmail(email);
-
     if (!user) {
       return done(null, false, {
         message: 'No user with that email.'
       });
     }
-
     try {
       if (await bcrypt.compare(password, user.password_salt)) {
         return done(null, user)

@@ -8,8 +8,6 @@ const FileStore = require('session-file-store')(session);
 const passport = require('passport');
 
 const app = express();
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
 
 app.use(
   session({
@@ -18,12 +16,23 @@ app.use(
     cookie: {
       path: '/',
       httpOnly: true,
-      maxAge: 60 * 60 * 1000
+      maxAge: 60 * 60 * 1000,
+      secure: false
     },
     resave: false,
     saveUninitialized: false,
   })
 )
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(function (req, res, next) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+  res.setHeader('Access-Control-Allow-Credentials', true);
+  next();
+});
 
 require('./config.passport');
 app.use(passport.initialize());

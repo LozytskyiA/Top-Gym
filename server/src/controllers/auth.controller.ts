@@ -1,5 +1,6 @@
 import * as express from 'express';
 import User from '../entities/user.entity';
+const passport = require('passport');
 
 exports.authentication = (request: express.Request, response: express.Response, next: express.NextFunction) => {
   passport.authenticate('local', (error, user: User) => {
@@ -13,7 +14,7 @@ exports.authentication = (request: express.Request, response: express.Response, 
       if (error) {
         return next(error);
       }
-      return response.redirect('/');
+      return response.redirect('/users');
     });
   })(request, response, next);
 }

@@ -1,10 +1,9 @@
-import { Column, Entity, PrimaryGeneratedColumn, JoinTable, ManyToMany, ManyToOne } from 'typeorm';
-import Program from './program.entity';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 class User {
   @PrimaryGeneratedColumn()
-  public user_id?: number;
+  public id?: number;
 
   @Column()
   public name: string;

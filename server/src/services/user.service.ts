@@ -13,13 +13,13 @@ exports.createUser = async (data: CreateUserDto) => {
 
 exports.getAllUsers = () => getRepository(User).find();
 
-exports.getUserById = (id: number) => getRepository(User).findOne(id);
+exports.getUserById = (id: number) => getRepository(User).findOne({id: id});
 
-exports.modifyUser = (id: number, userData: User) => {
-  getRepository(User).update(id, userData);
-  return getRepository(User).findOne(id);
+exports.modifyUser = async (id: number, userData: User) => {
+  await getRepository(User).update(id, userData);
+  return getRepository(User).findOne({id: id});
 }
 
-exports.getUserByEmail = (email: string) => getRepository(User).findOne(email)
+exports.getUserByEmail = (email: string) => getRepository(User).findOne({email: email});
 
 exports.deleteUser = (id: number) => getRepository(User).delete(id);

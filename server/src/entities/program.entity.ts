@@ -4,7 +4,7 @@ import User from './user.entity';
 @Entity()
 class Program {
   @PrimaryGeneratedColumn()
-  public program_id: number;
+  public id: number;
 
   @Column()
   public name: string;

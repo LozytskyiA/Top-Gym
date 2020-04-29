@@ -1,8 +1,21 @@
 import React, {FC, useState} from 'react';
 import Button from '@material-ui/core/Button';
-import { registerUser } from "../services/top-gym/top-gym.api";
-import { Input } from './shared/Input';
-import { Select } from './shared/Select';
+import { registerUser } from "../../services/top-gym/top-gym.api";
+import { Input } from '../shared/Input';
+import { Select } from '../shared/Select';
+import { FormWrapper } from './registration-form.styles';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    form: {
+      '& > *': {
+        margin: theme.spacing(1),
+        width: '100%',
+      },
+    },
+  }),
+);
 
 interface User {
   name: string;
@@ -12,7 +25,8 @@ interface User {
   role: string;
 }
 
-const RegistrationForm: FC = () => {
+export const RegistrationForm: FC = () => {
+  const classes = useStyles();
   const emptyUserData: User = {
     name: '',
     last_name: '',
@@ -37,7 +51,6 @@ const RegistrationForm: FC = () => {
     try {
       await registerUser(user);
       setUser(emptyUserData)
-      console.log('sadfsa');
     } catch(error) {
       console.log(error);
     }
@@ -46,7 +59,7 @@ const RegistrationForm: FC = () => {
   const getKeyValue = (key: string) => (obj: Record<string, any>) => obj[key];
   
   return (
-    <form noValidate autoComplete="off" onSubmit={createUser}>
+    <FormWrapper className={classes.form} noValidate autoComplete="off" onSubmit={createUser}>
       {Object.keys(user).map((label) => (
         label !== 'role'
         ? <Input inputChangeHandler={changeHandler} value={getKeyValue(label)(user)} label={label} key={label} inputName={label} />
@@ -55,8 +68,6 @@ const RegistrationForm: FC = () => {
       <Button onClick={createUser} variant="contained" color="secondary">
         Submit
       </Button>
-    </form>
+    </FormWrapper>
   );
 }
-
-export default RegistrationForm;

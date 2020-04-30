@@ -17,7 +17,7 @@ export const registerUser = async (user: any) => {
 }
 
 export const logInUser = async (user: any) => {
-  return await baseUrl.post('/login', user);
+  return await baseUrl.post('login', user);
 }
 
 export const updateQuiz = (id: number) => {

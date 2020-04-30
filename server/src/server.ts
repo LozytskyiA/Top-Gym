@@ -11,11 +11,10 @@ const app = express();
 
 app.use(
   session({
-    secret: 'Stark',
+    secret: 'stark',
     store: new FileStore(),
     cookie: {
-      path: '/',
-      httpOnly: true,
+      httpOnly: false,
       maxAge: 60 * 60 * 1000,
       secure: false
     },

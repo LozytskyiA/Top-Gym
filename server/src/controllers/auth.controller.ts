@@ -14,7 +14,7 @@ exports.authentication = (request: express.Request, response: express.Response, 
       if (error) {
         return next(error);
       }
-      return response.redirect('/users');
+      request.session.save(() => response.redirect('/users'));
     });
   })(request, response, next);
 }

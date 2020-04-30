@@ -6,15 +6,18 @@ const express = require('express');
 const session = require('express-session');
 const FileStore = require('session-file-store')(session);
 const passport = require('passport');
+var cookieParser = require('cookie-parser')
 
 const app = express();
 
+app.use(cookieParser());
 app.use(
   session({
     secret: 'stark',
     store: new FileStore(),
     cookie: {
-      httpOnly: false,
+      path: '/',
+      httpOnly: true,
       maxAge: 60 * 60 * 1000,
       secure: false
     },
@@ -26,7 +29,7 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(function (req, res, next) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
   res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
   res.setHeader('Access-Control-Allow-Credentials', true);

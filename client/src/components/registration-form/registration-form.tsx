@@ -5,6 +5,8 @@ import { Input } from '../shared/Input';
 import { Select } from '../shared/Select';
 import { FormWrapper } from './registration-form.styles';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { inputValidation } from '../../untils/inputValidation';
+import { SnackBar } from '../shared/Snackbar';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -36,23 +38,35 @@ export const RegistrationForm: FC = () => {
   }
 
   const [user, setUser] = useState<User>(emptyUserData)
+  const [open, setOpen] = useState(false);
+
+  const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpen(false);
+  };
 
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.persist();
     setUser((prevState => ({
       ...prevState,
       ...{
-        [event.target.name]: event.target.value,
+        [event.target.name]: event.target.value.trim(),
       }
     })))
   }
 
   const createUser = async () => {
-    try {
-      await registerUser(user);
-      setUser(emptyUserData)
-    } catch(error) {
-      console.log(error);
+    if(inputValidation(user)) {
+      try {
+        await registerUser(user);
+        setUser(emptyUserData)
+      } catch(error) {
+        console.log(error);
+      }
+    } else {
+      setOpen(true)
     }
   }
 
@@ -68,6 +82,7 @@ export const RegistrationForm: FC = () => {
       <Button onClick={createUser} variant="contained" color="secondary">
         Submit
       </Button>
+      <SnackBar open={open} message='All fields must be filled.' handleClose={handleClose} severity='error'/>
     </FormWrapper>
   );
 }

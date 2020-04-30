@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const baseUrl = axios.create({
-  baseURL: 'http://localhost:5000/',
+  baseURL: 'http://localhost:5000/'
 });
 
 export const getUsers = async () => {
@@ -14,10 +14,6 @@ export const getUser = async (id: number) => {
 
 export const registerUser = async (user: any) => {
   return await baseUrl.post('users', user);
-}
-
-export const logInUser = async (user: any) => {
-  return await baseUrl.post('login', user);
 }
 
 export const updateQuiz = (id: number) => {

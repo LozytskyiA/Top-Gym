@@ -7,6 +7,7 @@ interface ISelectProps {
   placeholder?: string;
   label: string,
   selectName: string,
+  errorHandler?: boolean
 }
 
 export const Select: FC<ISelectProps> = (props) => {
@@ -15,13 +16,15 @@ export const Select: FC<ISelectProps> = (props) => {
     inputChangeHandler,
     value,
     label,
-    selectName
+    selectName,
+    errorHandler,
    } = props
 
   return (
     <TextField onChange={inputChangeHandler} 
       value={value} 
       id="select"
+      error={errorHandler}
       label={label} 
       name={selectName} 
       select 

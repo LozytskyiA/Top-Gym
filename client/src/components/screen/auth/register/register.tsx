@@ -1,11 +1,12 @@
 import React, { FC } from 'react';
-import RegistrationForm from '../../../RegistrationForm';
+import { RegistrateWrapper } from './register.styles';
+import { RegistrationForm } from '../../../registration-form';
 
 export const UserRegistration: FC = () => {
   return (
-    <div>
-      <h1>Registration</h1>
+    <RegistrateWrapper>
+      <h1>REGISTRATION</h1>
       <RegistrationForm />
-    </div>
+    </RegistrateWrapper>
   );
 }

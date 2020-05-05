@@ -12,3 +12,7 @@ export const logInUser = (user: any) => {
 export const logOutUser = () => {
   return authUrl.get('/logout');
 }
+
+export const getLoggedUser = async () => {
+  return await authUrl.get('/islogin');
+}

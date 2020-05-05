@@ -7,6 +7,7 @@ import { FormWrapper } from './registration-form.styles';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { inputValidation } from '../../untils/inputValidation';
 import { SnackBar } from '../shared/Snackbar';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -29,6 +30,7 @@ interface User {
 
 export const RegistrationForm: FC = () => {
   const classes = useStyles();
+  const history = useHistory();
   const emptyUserData: User = {
     name: '',
     last_name: '',
@@ -62,6 +64,7 @@ export const RegistrationForm: FC = () => {
       try {
         await registerUser(user);
         setUser(emptyUserData)
+        history.push('/login')
       } catch(error) {
         console.log(error);
       }

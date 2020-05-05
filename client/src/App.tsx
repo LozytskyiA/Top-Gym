@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, {FC, useEffect} from 'react';
 import { observer } from "mobx-react";
 import { Header } from './components/header';
 import {
@@ -8,16 +8,32 @@ import {
 import { Home } from './components/screen/home';
 import { Login } from './components/screen/auth/login';
 import { UserRegistration } from './components/screen/auth/register';
+import Store from './stores/Store';
+import { PrivateRoute } from './services/private-route';
+
+const store = Store.create({
+  user: {
+    name: '',
+    last_name: '',
+    email: '',
+    role: ''
+  },
+  auth: {
+    isLogin: false
+  }
+})
 
 const App: FC = () => {
   return (
     <div className="App">
-      <Header />
+      <Header store={store} />
       <main>
         <Switch>
-          <Route path="/" exact component={Home} />
+          <PrivateRoute path="/" exact store={store}>
+            <Home store={store}/>
+          </PrivateRoute>
           <Route path="/registrate" exact component={UserRegistration} />
-          <Route path="/login" exact component={Login} />
+          <Route path="/login" exact render={(props) => <Login {...props} store={store} />}/>
         </Switch>
       </main>
     </div>

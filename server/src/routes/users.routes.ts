@@ -9,7 +9,7 @@ const router = Router();
 
 router.post(path, validationMiddleware(CreateUserDto), createUser);
 router.get(path, auth, getAllUsers);
-router.get(`${path}/:id`, getUserById);
+router.get(`${path}/:id`, auth, getUserById);
 router.patch(`${path}/:id`, validationMiddleware(CreateUserDto, true), modifyUser);
 router.delete(`${path}/:id`, deleteUser);
 
